@@ -1,0 +1,571 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Human learning is way more efficient in power consumption… for now. - My blog</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="My blog">
+<meta property="og:title" content="Human learning is way more efficient in power consumption… for now.">
+
+
+  <link rel="canonical" href="http://127.0.0.1:4000/blog/neural%20networks/human-learning-is-waaay-more-efficient-in-power-consumption-for-now/">
+  <meta property="og:url" content="http://127.0.0.1:4000/blog/neural%20networks/human-learning-is-waaay-more-efficient-in-power-consumption-for-now/">
+
+
+
+  <meta property="og:description" content="When I was eating dinner a simple thought occurred to me: is machine learning more power efficient than human learning… from scratch?A neural network called AlexNet was trained between five and six days on two GTX 580 3GB GPUs which have 363W consumption.So simply calculating,I found some site that describes recommended energy intakes for newborn babies. After some funny discussion we came to conclusion with my mom that I might’ve been able to perform ImageNet when I would have been 3 years old, so if I take that data, thenBy comparing these I got to conclusions that humans are about 300 times more power efficient in learning from scratch. Of course, I took an old version of GPU training so that might differ nowadays (I didn’t find other GPU usages quickly, but I knew I would find them in Alex’s paper. Maybe someone can calculate this for other nets?).Let’s assume that energy efficiency has the same exponential as Moore’s law so that it halves every 18 months.The GTX 580 launched on 9 November 2010 so it’s almost six years now, and the consumptions should be at the level of 363\times 2^{-4} = 22W. With this consumption it would take in total 6kW. By projecting these numbers human level power efficiency should be achieved by year 2022 - 6 years from now. And with better algorithms it’s probably going to be even sooner. Isn’t this exciting?">
+
+
+
+  <meta name="twitter:site" content="@michal_sustr">
+  <meta name="twitter:title" content="Human learning is way more efficient in power consumption… for now.">
+  <meta name="twitter:description" content="When I was eating dinner a simple thought occurred to me: is machine learning more power efficient than human learning… from scratch?A neural network called AlexNet was trained between five and six days on two GTX 580 3GB GPUs which have 363W consumption.So simply calculating,I found some site that describes recommended energy intakes for newborn babies. After some funny discussion we came to conclusion with my mom that I might’ve been able to perform ImageNet when I would have been 3 years old, so if I take that data, thenBy comparing these I got to conclusions that humans are about 300 times more power efficient in learning from scratch. Of course, I took an old version of GPU training so that might differ nowadays (I didn’t find other GPU usages quickly, but I knew I would find them in Alex’s paper. Maybe someone can calculate this for other nets?).Let’s assume that energy efficiency has the same exponential as Moore’s law so that it halves every 18 months.The GTX 580 launched on 9 November 2010 so it’s almost six years now, and the consumptions should be at the level of 363\times 2^{-4} = 22W. With this consumption it would take in total 6kW. By projecting these numbers human level power efficiency should be achieved by year 2022 - 6 years from now. And with better algorithms it’s probably going to be even sooner. Isn’t this exciting?">
+  <meta name="twitter:url" content="http://127.0.0.1:4000/neural%20networks/human-learning-is-waaay-more-efficient-in-power-consumption-for-now/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+  
+
+  
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2016-06-20T00:00:00+02:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Michal Šustr",
+      "url" : "http://127.0.0.1:4000/blog",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://127.0.0.1:4000/blog/feed.xml" type="application/atom+xml" rel="alternate" title="My blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://127.0.0.1:4000/blog/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+    <!-- start custom head snippets -->
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="http://127.0.0.1:4000/blog/">My blog</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://michal.sustr.sk">Main page</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="http://127.0.0.1:4000/blog/images/bio-photo.jpg" alt="Michal Šustr">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Michal Šustr</h3>
+    <p class="author__bio"><p>A soul between research and engineering.</p><p>Artificial Intelligence / Machine Learning.</p></p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> Prague, Czech republic</li>
+      
+      
+        <li><a href="http://michal.sustr.sk"><i class="fa fa-fw fa-chain" aria-hidden="true"></i> Website</a></li>
+      
+      
+      
+      
+        <li><a href="https://twitter.com/michal_sustr"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+        <li><a href="https://www.facebook.com/sustr"><i class="fa fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/michalsustr"><i class="fa fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Human learning is way more efficient in power consumption… for now.">
+    <meta itemprop="description" content="When I was eating dinner a simple thought occurred to me: is machine learning more power efficient than human learning… from scratch?A neural network called AlexNet was trained between five and six days on two GTX 580 3GB GPUs which have 363W consumption.So simply calculating,I found some site that describes recommended energy intakes for newborn babies. After some funny discussion we came to conclusion with my mom that I might’ve been able to perform ImageNet when I would have been 3 years old, so if I take that data, thenBy comparing these I got to conclusions that humans are about 300 times more power efficient in learning from scratch. Of course, I took an old version of GPU training so that might differ nowadays (I didn’t find other GPU usages quickly, but I knew I would find them in Alex’s paper. Maybe someone can calculate this for other nets?).Let’s assume that energy efficiency has the same exponential as Moore’s law so that it halves every 18 months.The GTX 580 launched on 9 November 2010 so it’s almost six years now, and the consumptions should be at the level of 363\times 2^{-4} = 22W. With this consumption it would take in total 6kW. By projecting these numbers human level power efficiency should be achieved by year 2022 - 6 years from now. And with better algorithms it’s probably going to be even sooner. Isn’t this exciting?">
+    <meta itemprop="datePublished" content="June 20, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Human learning is way more efficient in power consumption… for now.
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+This article takes
+
+  
+	  1 minute to read
+	
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>When I was eating dinner a simple thought occurred to me: is machine learning more power efficient than human learning… <em>from scratch</em>?</p>
+
+<p>A neural network called <a href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf">AlexNet</a> was trained between five and six days on two GTX 580 3GB GPUs which have <a href="http://www.bit-tech.net/hardware/graphics/2010/11/09/nvidia-geforce-gtx-580-review/8">363W consumption</a>.</p>
+
+<p>So simply calculating,</p>
+
+<script type="math/tex; mode=display">W_{GPU} = (5+6)\times 24 \times 363 = 95832\text{Wh}.</script>
+
+<p>I found some site that describes <a href="http://www.whfoods.com/genpage.php?tname=specialneed&amp;dbid=7">recommended energy intakes for newborn babies</a>. After some funny discussion we came to conclusion with my mom that I might’ve been able to perform ImageNet when I would have been 3 years old, so if I take that data, then</p>
+
+<script type="math/tex; mode=display">W_{human} = 550\times 6\times 30+700\times 6\times 30+1000\times 2\times 12 = 249000\text{cal} = 289.587 \text{Wh}.</script>
+
+<p>By comparing these I got to conclusions that humans are about <strong>300 times more power efficient</strong> in learning from scratch. Of course, I took an old version of GPU training so that might differ nowadays (I didn’t find other GPU usages quickly, but I knew I would find them in Alex’s paper. Maybe someone can calculate this for other nets?).</p>
+
+<p>Let’s assume that energy efficiency has the same <a href="https://www.technologyreview.com/s/425398/a-new-and-improved-moores-law/">exponential as Moore’s law</a> so that it halves every 18 months.
+The <a href="https://en.wikipedia.org/wiki/GeForce_500_series">GTX 580 launched on 9 November 2010</a> so it’s almost six years now, and the consumptions should be at the level of 363\times 2^{-4} = 22W. With this consumption it would take in total 6kW. By projecting these numbers human level power efficiency should be achieved by year 2022 - 6 years from now. And with better algorithms it’s probably going to be even sooner. Isn’t this exciting?</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://127.0.0.1:4000/blog/categories/neural-networks" class="page__taxonomy-item" rel="tag">neural networks</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-06-20T00:00:00+02:00">June 20, 2016</time></p>
+        
+      </footer>
+
+      
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=http://127.0.0.1:4000/blog/neural%20networks/human-learning-is-waaay-more-efficient-in-power-consumption-for-now/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:4000/blog/neural%20networks/human-learning-is-waaay-more-efficient-in-power-consumption-for-now/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://127.0.0.1:4000/blog/neural%20networks/human-learning-is-waaay-more-efficient-in-power-consumption-for-now/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://127.0.0.1:4000/blog/neural%20networks/human-learning-is-waaay-more-efficient-in-power-consumption-for-now/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+      
+
+
+  <nav class="pagination">
+    
+      <a href="http://127.0.0.1:4000/blog/predpovede-na-rok-2016/" class="pagination--pager" title="Predpovede na rok 2016
+">Previous</a>
+    
+    
+      <a href="http://127.0.0.1:4000/blog/python/sphinx-python-tips/" class="pagination--pager" title="Sphinx - python tips
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      
+
+<div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">Leave a Comment</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      
+        <h4 class="page__related-title">You May Also Enjoy</h4>
+      
+      <div class="grid__wrapper">
+        
+          
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        
+          <a href="http://127.0.0.1:4000/blog/python/outlier-analysis/" rel="permalink">
+        
+
+          <img src=
+            
+              "http://127.0.0.1:4000/blog/images/teaser.jpg"
+            
+            alt="">
+        </a>
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://127.0.0.1:4000/blog/python/outlier-analysis/" rel="permalink">Outlier analysis using PCA
+</a>
+      
+    </h2>
+
+    <p class="archive__item-excerpt" itemprop="description">Recently I tried to detect outliers in some high-dimensional data to find out more about the dataset. It is quite a common task - you have a dataset at your ...</p>
+  </article>
+</div>
+        
+          
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        
+          <a href="http://127.0.0.1:4000/blog/why-i-think-schmidhubers-conclusion-of-non-interfering-ai-is-wrong/" rel="permalink">
+        
+
+          <img src=
+            
+              "http://127.0.0.1:4000/blog/images/teaser.jpg"
+            
+            alt="">
+        </a>
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://127.0.0.1:4000/blog/why-i-think-schmidhubers-conclusion-of-non-interfering-ai-is-wrong/" rel="permalink">Why I think Schmidhuber’s conclusion of non-interfering AI is wrong
+</a>
+      
+    </h2>
+
+    <p class="archive__item-excerpt" itemprop="description">I really enjoyed watching Prof. Jürgen Schmidhuber’s talk about future of AI. The topic of AI becoming Terminator-style is an evergreen and as a person who a...</p>
+  </article>
+</div>
+        
+          
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        
+          <a href="http://127.0.0.1:4000/blog/python/protocol-buffers-python-tips/" rel="permalink">
+        
+
+          <img src=
+            
+              "http://127.0.0.1:4000/blog/images/teaser.jpg"
+            
+            alt="">
+        </a>
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://127.0.0.1:4000/blog/python/protocol-buffers-python-tips/" rel="permalink">Protocol buffers - python tips
+</a>
+      
+    </h2>
+
+    <p class="archive__item-excerpt" itemprop="description">Protocol buffers (protobufs) are well known Google’s mechanism for a language-neutral, platform-neutral, extensible mean for serializing structured data.
+
+Ba...</p>
+  </article>
+</div>
+        
+          
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        
+          <a href="http://127.0.0.1:4000/blog/python/sphinx-python-tips/" rel="permalink">
+        
+
+          <img src=
+            
+              "http://127.0.0.1:4000/blog/images/teaser.jpg"
+            
+            alt="">
+        </a>
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://127.0.0.1:4000/blog/python/sphinx-python-tips/" rel="permalink">Sphinx - python tips
+</a>
+      
+    </h2>
+
+    <p class="archive__item-excerpt" itemprop="description">I recently started to educate myself more in Python. I decided that from time to time I’m going to put here some tips and tricks, things that I’ve come acros...</p>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+</div>
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/michal_sustr"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+      <li><a href="https://facebook.com/sustr"><i class="fa fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+    
+    
+      <li><a href="http://github.com/michalsustr"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://127.0.0.1:4000/blog/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2016 Michal Šustr. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://127.0.0.1:4000/blog/assets/js/main.min.js"></script>
+
+
+
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-18710589-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'michalsustr';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>
