@@ -2,14 +2,16 @@
 layout: single
 title:  "Outlier analysis using PCA"
 date:   2016-09-02 18:38:20 +0200
-categories: python
+header:
+  teaser: teaser_pca_outlier.png
 tags:
 - python
 - PCA
+- outlier analysis
 ---
 
 
-Recently I tried to detect outliers in some high-dimensional data to find out more about the dataset. It is quite a common task - you have a dataset at your disposal, and you try to learn more about it. One of the very simplest and fastest ways is to use PCA projection:
+Recently I tried to detect outliers in some high-dimensional data to find out more about the dataset. This is quite a common task - you have a dataset that was given to you (by the client) and you try to learn more about it. One of the very simplest and fastest ways is to use PCA projection, which basically consists of:
 
 - find directions of the largest variance in the data,
 - project the high-dimensional points into 2D plane,
@@ -18,12 +20,19 @@ Recently I tried to detect outliers in some high-dimensional data to find out mo
 
 {% include toc %}
 
-However, when you find these records, you still don't know much about:
+However, when you find these records, what they didn't teach me at school is that you still don't know much about:
 
-- why they are actually outlying, and
+- **why** they are actually outlying, and
 - it can be cumbersome to get the record ID from the visual graph.
 
 In this post I solve the first problem by finding the original dimensions that influence the variance the most, and the latter by making use of some cool matplotlib functionality :)
+
+You can play with the source codes I will show here locally:
+
+```bash
+$ git clone https://github.com/michalsustr/blog_examples
+$ cd OutlierAnalysis
+```
 
 ## A bit of theory
 
@@ -83,88 +92,7 @@ order_book
 <div style="overflow:auto">
 <table border="1" class="dataframe">
   <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bid0Price</th>
-      <th>bid0Quantity</th>
-      <th>bid1Price</th>
-      <th>bid1Quantity</th>
-      <th>bid2Price</th>
-      <th>bid2Quantity</th>
-      <th>bid3Price</th>
-      <th>bid3Quantity</th>
-      <th>bid4Price</th>
-      <th>bid4Quantity</th>
-      <th>bid5Price</th>
-      <th>bid5Quantity</th>
-      <th>bid6Price</th>
-      <th>bid6Quantity</th>
-      <th>bid7Price</th>
-      <th>bid7Quantity</th>
-      <th>bid8Price</th>
-      <th>bid8Quantity</th>
-      <th>bid9Price</th>
-      <th>bid9Quantity</th>
-      <th>bid10Price</th>
-      <th>bid10Quantity</th>
-      <th>bid11Price</th>
-      <th>bid11Quantity</th>
-      <th>bid12Price</th>
-      <th>bid12Quantity</th>
-      <th>bid13Price</th>
-      <th>bid13Quantity</th>
-      <th>bid14Price</th>
-      <th>bid14Quantity</th>
-      <th>bid15Price</th>
-      <th>bid15Quantity</th>
-      <th>bid16Price</th>
-      <th>bid16Quantity</th>
-      <th>bid17Price</th>
-      <th>bid17Quantity</th>
-      <th>bid18Price</th>
-      <th>bid18Quantity</th>
-      <th>bid19Price</th>
-      <th>bid19Quantity</th>
-      <th>ask0Price</th>
-      <th>ask0Quantity</th>
-      <th>ask1Price</th>
-      <th>ask1Quantity</th>
-      <th>ask2Price</th>
-      <th>ask2Quantity</th>
-      <th>ask3Price</th>
-      <th>ask3Quantity</th>
-      <th>ask4Price</th>
-      <th>ask4Quantity</th>
-      <th>ask5Price</th>
-      <th>ask5Quantity</th>
-      <th>ask6Price</th>
-      <th>ask6Quantity</th>
-      <th>ask7Price</th>
-      <th>ask7Quantity</th>
-      <th>ask8Price</th>
-      <th>ask8Quantity</th>
-      <th>ask9Price</th>
-      <th>ask9Quantity</th>
-      <th>ask10Price</th>
-      <th>ask10Quantity</th>
-      <th>ask11Price</th>
-      <th>ask11Quantity</th>
-      <th>ask12Price</th>
-      <th>ask12Quantity</th>
-      <th>ask13Price</th>
-      <th>ask13Quantity</th>
-      <th>ask14Price</th>
-      <th>ask14Quantity</th>
-      <th>ask15Price</th>
-      <th>ask15Quantity</th>
-      <th>ask16Price</th>
-      <th>ask16Quantity</th>
-      <th>ask17Price</th>
-      <th>ask17Quantity</th>
-      <th>ask18Price</th>
-      <th>ask18Quantity</th>
-      <th>ask19Price</th>
-      <th>ask19Quantity</th>
+    <tr style="text-align: right;"><th></th><th>bid0Price</th><th>bid0Quantity</th><th>bid1Price</th><th>bid1Quantity</th><th>bid2Price</th><th>bid2Quantity</th><th>bid3Price</th><th>bid3Quantity</th><th>bid4Price</th><th>bid4Quantity</th><th>bid5Price</th><th>bid5Quantity</th><th>bid6Price</th><th>bid6Quantity</th><th>bid7Price</th><th>bid7Quantity</th><th>bid8Price</th><th>bid8Quantity</th><th>bid9Price</th><th>bid9Quantity</th><th>bid10Price</th><th>bid10Quantity</th><th>bid11Price</th><th>bid11Quantity</th><th>bid12Price</th><th>bid12Quantity</th><th>bid13Price</th><th>bid13Quantity</th><th>bid14Price</th><th>bid14Quantity</th><th>bid15Price</th><th>bid15Quantity</th><th>bid16Price</th><th>bid16Quantity</th><th>bid17Price</th><th>bid17Quantity</th><th>bid18Price</th><th>bid18Quantity</th><th>bid19Price</th><th>bid19Quantity</th><th>ask0Price</th><th>ask0Quantity</th><th>ask1Price</th><th>ask1Quantity</th><th>ask2Price</th><th>ask2Quantity</th><th>ask3Price</th><th>ask3Quantity</th><th>ask4Price</th><th>ask4Quantity</th><th>ask5Price</th><th>ask5Quantity</th><th>ask6Price</th><th>ask6Quantity</th><th>ask7Price</th><th>ask7Quantity</th><th>ask8Price</th><th>ask8Quantity</th><th>ask9Price</th><th>ask9Quantity</th><th>ask10Price</th><th>ask10Quantity</th><th>ask11Price</th><th>ask11Quantity</th><th>ask12Price</th><th>ask12Quantity</th><th>ask13Price</th><th>ask13Quantity</th><th>ask14Price</th><th>ask14Quantity</th><th>ask15Price</th><th>ask15Quantity</th><th>ask16Price</th><th>ask16Quantity</th><th>ask17Price</th><th>ask17Quantity</th><th>ask18Price</th><th>ask18Quantity</th><th>ask19Price</th><th>ask19Quantity</th>
     </tr>
     <tr>
       <th>timestamp</th>

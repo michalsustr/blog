@@ -32,22 +32,24 @@
 <meta property="og:title" content="Outlier analysis using PCA">
 
 
-  <link rel="canonical" href="http://michal.sustr.sk/blog/python/outlier-analysis/">
-  <meta property="og:url" content="http://michal.sustr.sk/blog/python/outlier-analysis/">
+  <link rel="canonical" href="http://michal.sustr.sk/blog/outlier-analysis/">
+  <meta property="og:url" content="http://michal.sustr.sk/blog/outlier-analysis/">
 
 
 
-  <meta property="og:description" content="Recently I tried to detect outliers in some high-dimensional data to find out more about the dataset. It is quite a common task - you have a dataset at your disposal, and you try to learn more about it. One of the very simplest and fastest ways is to use PCA projection:">
+  <meta property="og:description" content="Recently I tried to detect outliers in some high-dimensional data to find out more about the dataset. This is quite a common task - you have a dataset that was given to you (by the client) and you try to learn more about it. One of the very simplest and fastest ways is to use PCA projection, which basically consists of:">
 
 
 
   <meta name="twitter:site" content="@michal_sustr">
   <meta name="twitter:title" content="Outlier analysis using PCA">
-  <meta name="twitter:description" content="Recently I tried to detect outliers in some high-dimensional data to find out more about the dataset. It is quite a common task - you have a dataset at your disposal, and you try to learn more about it. One of the very simplest and fastest ways is to use PCA projection:">
-  <meta name="twitter:url" content="http://michal.sustr.sk/python/outlier-analysis/">
+  <meta name="twitter:description" content="Recently I tried to detect outliers in some high-dimensional data to find out more about the dataset. This is quite a common task - you have a dataset that was given to you (by the client) and you try to learn more about it. One of the very simplest and fastest ways is to use PCA projection, which basically consists of:">
+  <meta name="twitter:url" content="http://michal.sustr.sk/outlier-analysis/">
 
   
     <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="http://michal.sustr.sk/blog/images/teaser_pca_outlier.png">
     
   
 
@@ -60,6 +62,8 @@
   
 
 
+
+  <meta property="og:image" content="http://michal.sustr.sk/blog/images/teaser_pca_outlier.png">
 
 
 
@@ -217,7 +221,7 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="Outlier analysis using PCA">
-    <meta itemprop="description" content="Recently I tried to detect outliers in some high-dimensional data to find out more about the dataset. It is quite a common task - you have a dataset at your disposal, and you try to learn more about it. One of the very simplest and fastest ways is to use PCA projection:">
+    <meta itemprop="description" content="Recently I tried to detect outliers in some high-dimensional data to find out more about the dataset. This is quite a common task - you have a dataset that was given to you (by the client) and you try to learn more about it. One of the very simplest and fastest ways is to use PCA projection, which basically consists of:">
     <meta itemprop="datePublished" content="September 02, 2016">
     
 
@@ -229,7 +233,7 @@
           
             <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
 
-This article takes
+This article takes about
 
   
 	  13 minute to read
@@ -240,7 +244,7 @@ This article takes
       
 
       <section class="page__content" itemprop="text">
-        <p>Recently I tried to detect outliers in some high-dimensional data to find out more about the dataset. It is quite a common task - you have a dataset at your disposal, and you try to learn more about it. One of the very simplest and fastest ways is to use PCA projection:</p>
+        <p>Recently I tried to detect outliers in some high-dimensional data to find out more about the dataset. This is quite a common task - you have a dataset that was given to you (by the client) and you try to learn more about it. One of the very simplest and fastest ways is to use PCA projection, which basically consists of:</p>
 
 <ul>
   <li>find directions of the largest variance in the data,</li>
@@ -262,14 +266,21 @@ This article takes
   </nav>
 </aside>
 
-<p>However, when you find these records, you still don’t know much about:</p>
+<p>However, when you find these records, what they didn’t teach me at school is that you still don’t know much about:</p>
 
 <ul>
-  <li>why they are actually outlying, and</li>
+  <li><strong>why</strong> they are actually outlying, and</li>
   <li>it can be cumbersome to get the record ID from the visual graph.</li>
 </ul>
 
 <p>In this post I solve the first problem by finding the original dimensions that influence the variance the most, and the latter by making use of some cool matplotlib functionality :)</p>
+
+<p>You can play with the source codes I will show here locally:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>git clone https://github.com/michalsustr/blog_examples
+<span class="gp">$ </span><span class="nb">cd </span>OutlierAnalysis
+</code></pre>
+</div>
 
 <h2 id="a-bit-of-theory">A bit of theory</h2>
 
@@ -324,88 +335,7 @@ This article takes
 <div style="overflow:auto">
 <table border="1" class="dataframe">
   <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bid0Price</th>
-      <th>bid0Quantity</th>
-      <th>bid1Price</th>
-      <th>bid1Quantity</th>
-      <th>bid2Price</th>
-      <th>bid2Quantity</th>
-      <th>bid3Price</th>
-      <th>bid3Quantity</th>
-      <th>bid4Price</th>
-      <th>bid4Quantity</th>
-      <th>bid5Price</th>
-      <th>bid5Quantity</th>
-      <th>bid6Price</th>
-      <th>bid6Quantity</th>
-      <th>bid7Price</th>
-      <th>bid7Quantity</th>
-      <th>bid8Price</th>
-      <th>bid8Quantity</th>
-      <th>bid9Price</th>
-      <th>bid9Quantity</th>
-      <th>bid10Price</th>
-      <th>bid10Quantity</th>
-      <th>bid11Price</th>
-      <th>bid11Quantity</th>
-      <th>bid12Price</th>
-      <th>bid12Quantity</th>
-      <th>bid13Price</th>
-      <th>bid13Quantity</th>
-      <th>bid14Price</th>
-      <th>bid14Quantity</th>
-      <th>bid15Price</th>
-      <th>bid15Quantity</th>
-      <th>bid16Price</th>
-      <th>bid16Quantity</th>
-      <th>bid17Price</th>
-      <th>bid17Quantity</th>
-      <th>bid18Price</th>
-      <th>bid18Quantity</th>
-      <th>bid19Price</th>
-      <th>bid19Quantity</th>
-      <th>ask0Price</th>
-      <th>ask0Quantity</th>
-      <th>ask1Price</th>
-      <th>ask1Quantity</th>
-      <th>ask2Price</th>
-      <th>ask2Quantity</th>
-      <th>ask3Price</th>
-      <th>ask3Quantity</th>
-      <th>ask4Price</th>
-      <th>ask4Quantity</th>
-      <th>ask5Price</th>
-      <th>ask5Quantity</th>
-      <th>ask6Price</th>
-      <th>ask6Quantity</th>
-      <th>ask7Price</th>
-      <th>ask7Quantity</th>
-      <th>ask8Price</th>
-      <th>ask8Quantity</th>
-      <th>ask9Price</th>
-      <th>ask9Quantity</th>
-      <th>ask10Price</th>
-      <th>ask10Quantity</th>
-      <th>ask11Price</th>
-      <th>ask11Quantity</th>
-      <th>ask12Price</th>
-      <th>ask12Quantity</th>
-      <th>ask13Price</th>
-      <th>ask13Quantity</th>
-      <th>ask14Price</th>
-      <th>ask14Quantity</th>
-      <th>ask15Price</th>
-      <th>ask15Quantity</th>
-      <th>ask16Price</th>
-      <th>ask16Quantity</th>
-      <th>ask17Price</th>
-      <th>ask17Quantity</th>
-      <th>ask18Price</th>
-      <th>ask18Quantity</th>
-      <th>ask19Price</th>
-      <th>ask19Quantity</th>
+    <tr style="text-align: right;"><th></th><th>bid0Price</th><th>bid0Quantity</th><th>bid1Price</th><th>bid1Quantity</th><th>bid2Price</th><th>bid2Quantity</th><th>bid3Price</th><th>bid3Quantity</th><th>bid4Price</th><th>bid4Quantity</th><th>bid5Price</th><th>bid5Quantity</th><th>bid6Price</th><th>bid6Quantity</th><th>bid7Price</th><th>bid7Quantity</th><th>bid8Price</th><th>bid8Quantity</th><th>bid9Price</th><th>bid9Quantity</th><th>bid10Price</th><th>bid10Quantity</th><th>bid11Price</th><th>bid11Quantity</th><th>bid12Price</th><th>bid12Quantity</th><th>bid13Price</th><th>bid13Quantity</th><th>bid14Price</th><th>bid14Quantity</th><th>bid15Price</th><th>bid15Quantity</th><th>bid16Price</th><th>bid16Quantity</th><th>bid17Price</th><th>bid17Quantity</th><th>bid18Price</th><th>bid18Quantity</th><th>bid19Price</th><th>bid19Quantity</th><th>ask0Price</th><th>ask0Quantity</th><th>ask1Price</th><th>ask1Quantity</th><th>ask2Price</th><th>ask2Quantity</th><th>ask3Price</th><th>ask3Quantity</th><th>ask4Price</th><th>ask4Quantity</th><th>ask5Price</th><th>ask5Quantity</th><th>ask6Price</th><th>ask6Quantity</th><th>ask7Price</th><th>ask7Quantity</th><th>ask8Price</th><th>ask8Quantity</th><th>ask9Price</th><th>ask9Quantity</th><th>ask10Price</th><th>ask10Quantity</th><th>ask11Price</th><th>ask11Quantity</th><th>ask12Price</th><th>ask12Quantity</th><th>ask13Price</th><th>ask13Quantity</th><th>ask14Price</th><th>ask14Quantity</th><th>ask15Price</th><th>ask15Quantity</th><th>ask16Price</th><th>ask16Quantity</th><th>ask17Price</th><th>ask17Quantity</th><th>ask18Price</th><th>ask18Quantity</th><th>ask19Price</th><th>ask19Quantity</th>
     </tr>
     <tr>
       <th>timestamp</th>
@@ -2067,6 +1997,10 @@ set()
     
       
       
+      <a href="http://michal.sustr.sk/blog/tags/outlier-analysis" class="page__taxonomy-item" rel="tag">outlier analysis</a><span class="sep">, </span>
+    
+      
+      
       <a href="http://michal.sustr.sk/blog/tags/pca" class="page__taxonomy-item" rel="tag">PCA</a><span class="sep">, </span>
     
       
@@ -2077,29 +2011,6 @@ set()
   </p>
 
 
-
-
-  
-
-
-
-
-
-
-  
-  
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
-    <span itemprop="keywords">
-    
-      
-      
-      <a href="http://michal.sustr.sk/blog/categories/python" class="page__taxonomy-item" rel="tag">python</a>
-    
-    </span>
-  </p>
 
 
         
@@ -2114,13 +2025,13 @@ set()
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=http://michal.sustr.sk/blog/python/outlier-analysis/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=http://michal.sustr.sk/blog/outlier-analysis/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http://michal.sustr.sk/blog/python/outlier-analysis/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://michal.sustr.sk/blog/outlier-analysis/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=http://michal.sustr.sk/blog/python/outlier-analysis/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=http://michal.sustr.sk/blog/outlier-analysis/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://michal.sustr.sk/blog/python/outlier-analysis/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://michal.sustr.sk/blog/outlier-analysis/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
       

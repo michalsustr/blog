@@ -4,7 +4,7 @@
   {% assign words = page.content | strip_html | number_of_words %}
 {% endif %}
 
-This article takes
+This article takes about
 {% if site.words_per_minute %}
   {% if words < 180 %}
 	  {{ site.data.ui-text[site.locale].less_than | default: "less than" }} 1 {{ site.data.ui-text[site.locale].minute_read | default: "minute to read" }}
